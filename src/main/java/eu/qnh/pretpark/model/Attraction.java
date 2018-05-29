@@ -1,5 +1,7 @@
 package eu.qnh.pretpark.model;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,6 +17,8 @@ public class Attraction implements Serializable {
     private String name;
     private int capacity;
     private double length;
+
+
 
     public long getId() {
         return id;
