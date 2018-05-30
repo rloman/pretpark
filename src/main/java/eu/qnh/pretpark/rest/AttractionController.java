@@ -24,7 +24,7 @@ public class AttractionController {
     private AttractionService attractionService;
 
 
-    @Value("${controllerName}")
+    @Value("${application.controllerName}")
     private String controllerName;
 
 
