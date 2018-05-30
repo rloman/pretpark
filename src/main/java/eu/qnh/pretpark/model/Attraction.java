@@ -1,6 +1,7 @@
 package eu.qnh.pretpark.model;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,6 +19,8 @@ public class Attraction implements Serializable {
     private int capacity;
     private double length;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(Attraction.class);
+
 
 
     public long getId() {
@@ -30,6 +33,8 @@ public class Attraction implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+
+        LOGGER.error("Attraction [{}] set to name [{}]", this, name );
     }
 
     public int getCapacity() {
