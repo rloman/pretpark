@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 
 @Service
 public class AttractionService {
@@ -18,7 +20,10 @@ public class AttractionService {
     public Iterable<Attraction> findAll() {
 
         return this.attractionRepository.findAll();
+    }
 
+    public Optional<Attraction> findById(long id) {
+        return this.attractionRepository.findById(id);
     }
 
 

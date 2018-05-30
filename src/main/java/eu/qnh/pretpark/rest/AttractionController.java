@@ -2,6 +2,7 @@ package eu.qnh.pretpark.rest;
 
 import eu.qnh.pretpark.dao.AttractionRepository;
 import eu.qnh.pretpark.model.Attraction;
+import eu.qnh.pretpark.service.AttractionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class AttractionController {
     private static final Logger LOGGER = LoggerFactory.getLogger(AttractionController.class);
 
     @Autowired
-    private AttractionRepository attractionRepository;
+    private AttractionService attractionService;
 
 
     @Value("${controllerName}")
@@ -44,19 +45,19 @@ public class AttractionController {
     @GetMapping
     public Iterable<Attraction> list(){
 
-        return this.attractionRepository.findAll();
+        return this.attractionService.findAll();
     }
 
     @PostMapping(consumes = "application/json",
             produces = "application/json")
     public Attraction create(@RequestBody  Attraction attraction) {
-        return this.attractionRepository.save(attraction);
+        return this.attractionService.save(attraction);
     }
 
     @GetMapping("{id}")
     public ResponseEntity<Attraction> findById(@PathVariable long id) {
 
-        Optional<Attraction> optionalAttraction =  this.attractionRepository.findById(id);
+        Optional<Attraction> optionalAttraction =  this.attractionService.findById(id);
 
         if(optionalAttraction.isPresent()) {
             return ResponseEntity.ok(optionalAttraction.get());
@@ -75,7 +76,7 @@ public class AttractionController {
             attraction.setCapacity(Double.valueOf(Math.random()*10).intValue());
             attraction.setLength(new Random(i).nextDouble());
 
-            this.attractionRepository.save(attraction);
+            this.attractionService.save(attraction);
 
             LOGGER.info("Saved attraction [{}] in controller with name [{}]", attraction, this.controllerName);
         }
